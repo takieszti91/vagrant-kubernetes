@@ -84,7 +84,7 @@ build {
             "sudo kubeadm config images pull",
 
             # install helm3
-            "wget -O /tmp/helm.tar.gz https://get.helm.sh/helm-v3.5.1-linux-amd64.tar.gz",
+            "wget -O /tmp/helm.tar.gz https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz",
             "tar -xOvf /tmp/helm.tar.gz linux-amd64/helm > /tmp/helm",
             "sudo install /tmp/helm /usr/local/bin/helm",
         ]

@@ -10,7 +10,7 @@ storage_longhorn = true
 # variable must be kept secure.
 KUBEADM_TOKEN = "aaaaaa.aaaaaaaaaaaaaaaa"
 
-CONTROL_PLANE_PRIVATE_ADDRESS = "10.80.0.10"
+CONTROL_PLANE_PRIVATE_ADDRESS = "192.168.56.10"
 
 # `$install_control_plane_script` is an helper script that install a kubeadm configuration
 # and calls kubeadm init. This script take the KUBEADM_TOKEN as argument.
@@ -60,7 +60,7 @@ sudo kubectl create ns kube-platform
 sudo helm repo add traefik https://helm.traefik.io/traefik
 
 sudo helm upgrade -i --namespace=kube-platform traefik traefik/traefik \
-    --set=additionalArguments="{--entryPoints.web.proxyProtocol.trustedIPs=10.80.0.0/16,--accesslog=true,--metrics=true,--metrics.prometheus=true}" \
+    --set=additionalArguments="{--entryPoints.web.proxyProtocol.trustedIPs=192.168.56.0/21,--accesslog=true,--metrics=true,--metrics.prometheus=true}" \
     --set=ports.web.nodePort=32080 \
     --set=ports.websecure.nodePort=32443 \
     --set=service.type=NodePort \
@@ -168,7 +168,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "worker-#{server_index}" do |node|
       node.vm.box = KUBE_IMAGE
       node.vm.hostname = "worker-#{server_index}"
-      node.vm.network :private_network, ip: "10.80.0.#{server_index + 10}"
+      node.vm.network :private_network, ip: "192.168.56.#{server_index + 10}"
 
       node.vm.provider "virtualbox" do |node|
         node.check_guest_additions = false
